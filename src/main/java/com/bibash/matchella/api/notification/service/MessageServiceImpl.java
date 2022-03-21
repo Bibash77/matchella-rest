@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.user.User;
-import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.api.notification.Message;
 import com.bibash.matchella.api.notification.repository.MessageRepository;
 import com.bibash.matchella.core.enums.Status;
@@ -21,15 +20,12 @@ import com.bibash.matchella.core.enums.Status;
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final UserService userService;
-    private final WalletService walletService;
 
     public MessageServiceImpl(
         MessageRepository messageRepository,
-        UserService userService,
-        WalletService walletService) {
+        UserService userService) {
         this.messageRepository = messageRepository;
         this.userService = userService;
-        this.walletService = walletService;
     }
 
     @Override

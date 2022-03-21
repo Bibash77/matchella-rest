@@ -17,22 +17,17 @@ import org.springframework.stereotype.Service;
 
 import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.api.user.repository.UserRepository;
-import com.bibash.matchella.api.Wallet.Wallet;
-import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.core.config.exception.CustomException;
 import com.bibash.matchella.core.enums.Status;
 
 @Service("userDetailService")
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final WalletService walletService;
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-        WalletService walletService,
         PasswordEncoder passwordEncoder){
         this.userRepository= userRepository;
-        this.walletService = walletService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -52,7 +47,6 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         try {
             if (user.getId() == null) {
-                user.setWalletAmount(0.0);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setUserCode(userCodeGenerateor());
                 user.setStatus(Status.INACTIVE);
@@ -111,8 +105,6 @@ public class UserServiceImpl implements UserService {
         if(authentication.getPrincipal() instanceof UserDetails){
             User user = (User) authentication.getPrincipal();
             user = this.findUserByName(user.getUsername());
-            Wallet wallet = walletService.getWalletByUser(user.getId());
-            user.setWalletAmount(wallet.getWalletAmount());
             return user;
         } else {
             throw new UsernameNotFoundException("User is not Authenticated; Found type: " + authentication.getPrincipal().getClass());

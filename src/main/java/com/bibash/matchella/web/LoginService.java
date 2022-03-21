@@ -7,8 +7,6 @@ import org.springframework.util.ObjectUtils;
 
 import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.user.User;
-import com.bibash.matchella.api.Wallet.Wallet;
-import com.bibash.matchella.api.Wallet.WalletRepo.WalletRepository;
 import com.bibash.matchella.api.dto.LoginDto;
 import com.bibash.matchella.api.dto.UserDto;
 
@@ -17,17 +15,13 @@ public class LoginService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private WalletRepository walletRepository;
 
     public UserDto loginChecking(LoginDto loginDto){
         User user = userService.findUserByName(loginDto.getUserName());
             if(!ObjectUtils.isEmpty(user)){
-            Wallet wallet = walletRepository.findWalletByUser(user);
             UserDto userDto = new UserDto();
                 BeanUtils.copyProperties(user , userDto);
             if(user.getPassword().equals(loginDto.getPassword())){
-                userDto.setWalletAmount(wallet.getWalletAmount());
                 return userDto;
             }
         }

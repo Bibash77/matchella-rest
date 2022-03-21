@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.user.User;
-import com.bibash.matchella.api.Wallet.Wallet;
-import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.core.dto.RestResponseDto;
 import com.bibash.matchella.core.enums.RoleType;
 import com.bibash.matchella.core.enums.Status;
@@ -28,16 +26,13 @@ import com.bibash.matchella.web.LoginService;
 public class UserController {
 
     private UserService userService;
-    private WalletService walletService;
 
     @Autowired
     private LoginService loginService;
 
     @Autowired
-    public UserController(UserService userService,
-        WalletService walletService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.walletService = walletService;
     }
 
     @GetMapping("/authenticated")
@@ -64,9 +59,6 @@ public class UserController {
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         user.setStatus(Status.INACTIVE);
         user.setRoleType(RoleType.STUDENT);
-        Wallet wallet = new Wallet();
-        wallet.setUser(userService.save(user));
-        walletService.save(wallet);
         return new RestResponseDto().successModel(new User());
     }
 

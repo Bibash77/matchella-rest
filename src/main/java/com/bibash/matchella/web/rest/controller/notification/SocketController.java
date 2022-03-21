@@ -9,7 +9,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bibash.matchella.api.OrderItem.Service.OrderService;
 import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.notification.Message;
 import com.bibash.matchella.api.notification.service.MessageService;
@@ -22,17 +21,14 @@ public class SocketController {
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final MessageService service;
     private final UserService userService;
-    private final OrderService orderService;
     private final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
     public SocketController(
         SimpMessagingTemplate simpMessagingTemplate,
-        MessageService service, UserService userService,
-        OrderService orderService) {
+        MessageService service, UserService userService) {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.service = service;
         this.userService = userService;
-        this.orderService = orderService;
     }
 
     @MessageMapping("/send/message")
