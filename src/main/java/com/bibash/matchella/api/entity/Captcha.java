@@ -11,10 +11,10 @@ import java.util.Date;
 public class Captcha {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private Long id;
 	
-	@Column(columnDefinition="mediumtext")
+	@Column(columnDefinition="text")
 	private String image;
 	
 	@JsonIgnore

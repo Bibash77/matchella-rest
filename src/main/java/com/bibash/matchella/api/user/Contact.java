@@ -19,7 +19,7 @@ public class Contact {
 	private String email;
 	
 	@Convert(converter = TextEncryptorConverter.class)
-	@Column(columnDefinition="mediumtext", updatable = false)
+	@Column(columnDefinition="text", updatable = false)
 	private String message;
 	
 	private Date date;

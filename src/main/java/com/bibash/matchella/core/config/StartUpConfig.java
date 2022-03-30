@@ -35,16 +35,16 @@ public class StartUpConfig {
     }
 
     private void createSuperAdmin() {
-        final User admin = userRepository.findUserByUserName(AppConstant.DEFAULT_SUPER_ADMIN_USERNAME);
-        if (admin == null) {
-            final User user = new User();
-            user.setFullName(AppConstant.DEFAULT_SUPER_ADMIN_NAME);
-            user.setUserName(AppConstant.DEFAULT_SUPER_ADMIN_USERNAME);
-            user.setPassword(passwordEncoder.encode(AppConstant.DEFAULT_SUPER_ADMIN_PASSWORD));
-            user.setStatus(Status.ACTIVE);
-            user.setEmail("demo@gmail.com");
-            user.setRoleType(RoleType.ADMIN);
-            user.setUserCode("123456");
-        }
+//        final User admin = userRepository.findUserByUserName(AppConstant.DEFAULT_SUPER_ADMIN_USERNAME);
+//        if (admin == null) {
+//            final User user = new User();
+//            user.setFullName(AppConstant.DEFAULT_SUPER_ADMIN_NAME);
+//            user.setUserName(AppConstant.DEFAULT_SUPER_ADMIN_USERNAME);
+//            user.setPassword(passwordEncoder.encode(AppConstant.DEFAULT_SUPER_ADMIN_PASSWORD));
+//            user.setStatus(Status.ACTIVE);
+//            user.setEmail("demo@gmail.com");
+//            user.setRoleType(RoleType.ADMIN);
+//            user.setUserCode("123456");
+//        }
     }
 }

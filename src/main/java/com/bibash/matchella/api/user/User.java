@@ -29,11 +29,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="user")
-@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity<Long> implements UserDetails , Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column(name = "user_name", unique = true, nullable = false)

@@ -22,7 +22,7 @@ public class UserProfilePicture {
 	@OneToOne
 	private User user;
 
-	@Column(columnDefinition = "mediumtext")
+	@Column(columnDefinition = "text")
 	private String data;
 
 	@Override
