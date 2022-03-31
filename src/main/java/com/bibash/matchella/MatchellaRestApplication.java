@@ -12,10 +12,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EntityScan("com.bibash.matchella")
 @EnableCaching
 @EnableScheduling
-public class CanteenProjectApplication {
+public class MatchellaRestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CanteenProjectApplication.class, args);
+		SpringApplication.run(MatchellaRestApplication.class, args);
 	}
 
 }

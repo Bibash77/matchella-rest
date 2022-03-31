@@ -1,4 +1,4 @@
-# CanteenProject
+# matchella --> match making social platform
 
 ## default user
 
