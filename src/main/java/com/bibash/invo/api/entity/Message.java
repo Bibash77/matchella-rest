@@ -1,5 +1,6 @@
-package com.bibash.invo.api.user;
+package com.bibash.invo.api.entity;
 
+import com.bibash.invo.api.user.User;
 import com.bibash.invo.core.component.TextEncryptorConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

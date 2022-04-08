@@ -1,6 +1,6 @@
-package com.bibash.invo.api.user;
+package com.bibash.invo.api.entity;
 
-import com.nonononoki.alovoa.repo.UserBlockRepository;
+import com.bibash.invo.api.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

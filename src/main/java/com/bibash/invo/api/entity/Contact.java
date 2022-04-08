@@ -1,4 +1,4 @@
-package com.bibash.invo.api.user;
+package com.bibash.invo.api.entity;
 
 import com.bibash.invo.core.component.TextEncryptorConverter;
 import lombok.Data;

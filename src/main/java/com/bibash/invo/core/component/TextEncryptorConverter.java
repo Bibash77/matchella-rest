@@ -10,6 +10,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -18,6 +19,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 @Component
+@Converter
 public class TextEncryptorConverter implements AttributeConverter<String, String> {
 
 	@Value("${app.text.key}")
