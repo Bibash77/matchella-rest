@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.invo.matchela.api.notification.Message;
+import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.api.notification.repository.MessageRepository;
-import com.invo.matchela.api.user.Service.UserService;
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.Service.UserService;
+import com.invo.matchela.authorization.user.User;
 import com.invo.matchela.core.enums.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,56 +28,56 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> findAll() {
+    public List<Notification> findAll() {
         return messageRepository.findAll();
     }
 
     @Override
-    public Message findOne(Long id) {
+    public Notification findOne(Long id) {
         return messageRepository.getOne(id);
     }
 
     @Override
-    public Message save(Message message) {
-        return messageRepository.save(message);
+    public Notification save(Notification notification) {
+        return messageRepository.save(notification);
     }
 
     @Override
-    public Page<Message> findAllPageable(Object t, Pageable pageable) {
+    public Page<Notification> findAllPageable(Object t, Pageable pageable) {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> s = objectMapper.convertValue(t, Map.class);
         s.values().removeIf(Objects::isNull);
         final NotificationSpecBuilder notificationSpecBuilder = new NotificationSpecBuilder(s);
-        final Specification<Message> specification = notificationSpecBuilder.build();
+        final Specification<Notification> specification = notificationSpecBuilder.build();
             return messageRepository.findAll(specification, pageable);
     }
 
     @Override
-    public List<Message> saveAll(List<Message> list) {
+    public List<Notification> saveAll(List<Notification> list) {
         return messageRepository.saveAll(list);
     }
 
-    public String messageGenerator(Message message){
-        User user = userService.findById(message.getFromId());
-        message.setStatus(Status.ACTIVE);
+    public String messageGenerator(Notification notification){
+        User user = userService.findById(notification.getFromId());
+        notification.setStatus(Status.ACTIVE);
 
-        switch (message.getActionType()){
+        switch (notification.getActionType()){
             case "ORDER":
-                return "Order Code:"+message.getOrderCode()+". "+user.getUsername() + " has ordered "+ message.getQuantity()+ " unit " + message.getItemName() +". Rs "+ message.getTransactionAmount() +" is deducted.";
+                return "Order Code:"+ notification.getOrderCode()+". "+user.getUsername() + " has ordered "+ notification.getQuantity()+ " unit " + notification.getItemName() +". Rs "+ notification.getTransactionAmount() +" is deducted.";
             case "TOP-UP":
-                return "Admin has TopUp Rs. "+message.getTransactionAmount() +" in " + user.getUsername() + " Account";
+                return "Admin has TopUp Rs. "+ notification.getTransactionAmount() +" in " + user.getUsername() + " Account";
             case "DELIVERED":
             case  "READY":
-                return "Order Code:"+message.getOrderCode()+" .Your Order of "+ message.getQuantity() + " Unit " + message.getItemName() + " is "+ message.getActionType() + " now";
+                return "Order Code:"+ notification.getOrderCode()+" .Your Order of "+ notification.getQuantity() + " Unit " + notification.getItemName() + " is "+ notification.getActionType() + " now";
             case "CANCEL":
-                if (message.getItemName() == null) {
+                if (notification.getItemName() == null) {
                     return
-                        " Rs." + message.getTransactionAmount() + " is added in" + user
+                        " Rs." + notification.getTransactionAmount() + " is added in" + user
                             .getUsername() + " account by Admin";
                 } else {
                     return
-                        user.getUsername() + " has cancel order of " + message.getItemName() + ". Rs"
-                            + message.getTransactionAmount() + " is added in account.";
+                        user.getUsername() + " has cancel order of " + notification.getItemName() + ". Rs"
+                            + notification.getTransactionAmount() + " is added in account.";
                 }
         }
         return "";

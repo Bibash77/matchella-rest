@@ -1,12 +1,7 @@
 package com.invo.matchela.api.notification;
 
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +16,8 @@ import com.invo.matchela.core.enums.Status;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+@Table(name="tbl_notification")
+public class Notification {
 
     @Id
     @GeneratedValue

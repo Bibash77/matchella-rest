@@ -1,4 +1,4 @@
-package com.invo.matchela.api.user;
+package com.invo.matchela.authorization.user;
 
 import lombok.Getter;
 import lombok.Setter;

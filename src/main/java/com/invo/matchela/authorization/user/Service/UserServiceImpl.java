@@ -1,14 +1,10 @@
-package com.invo.matchela.api.user.Service;
+package com.invo.matchela.authorization.user.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-
-import com.invo.matchela.api.user.User;
-import com.invo.matchela.api.user.repository.UserRepository;
+import com.invo.matchela.authorization.user.User;
+import com.invo.matchela.authorization.user.repository.UserRepository;
+import com.invo.matchela.core.config.exception.CustomException;
 import com.invo.matchela.core.enums.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -18,23 +14,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.invo.matchela.core.config.exception.CustomException;
+import java.util.*;
 
 @Service("userDetailService")
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository,
-        PasswordEncoder passwordEncoder){
-        this.userRepository= userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
-    public List findAll()
-    {
+    public List findAll() {
         return userRepository.findAll();
     }
 
@@ -54,7 +46,7 @@ public class UserServiceImpl implements UserService {
             return userRepository.save(user);
         } catch (Exception e) {
             throw new CustomException(
-                "User with username: " + user.getUsername() + " already exist!!!");
+                    "User with username: " + user.getUsername() + " already exist!!!");
         }
     }
 
@@ -85,11 +77,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByName(String userName) {
-        return userRepository.findUserByUserName(userName);
+        return userRepository.findUserByUsername(userName);
     }
 
     @Override
-    public Map<String , Long> countUser(Date startDate, Date endDate, Status status) {
+    public Map<String, Long> countUser(Date startDate, Date endDate, Status status) {
         return userRepository.countUsers(status);
     }
 
@@ -102,7 +94,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication.getPrincipal() instanceof UserDetails){
+        if (authentication.getPrincipal() instanceof UserDetails) {
             User user = (User) authentication.getPrincipal();
             user = this.findUserByName(user.getUsername());
             return user;
@@ -113,6 +105,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserByUserName(username);
+        return userRepository.getUsersByUsername(username);
+
+
     }
+
 }

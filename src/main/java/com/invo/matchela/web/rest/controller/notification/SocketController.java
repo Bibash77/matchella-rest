@@ -1,8 +1,8 @@
 package com.invo.matchela.web.rest.controller.notification;
 
-import com.invo.matchela.api.notification.Message;
+import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.api.notification.service.MessageService;
-import com.invo.matchela.api.user.Service.UserService;
+import com.invo.matchela.authorization.user.Service.UserService;
 import com.invo.matchela.core.dto.RestResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,20 +31,20 @@ public class SocketController {
     }
 
     @MessageMapping("/send/message")
-    public ResponseEntity<?> usingSocketMessaging(@RequestBody Message message) {
-            if (ObjectUtils.isEmpty(message.getToRole()) && ObjectUtils.isEmpty(message.getToId())) {
-                logger.error("Error saving message {}", message);
+    public ResponseEntity<?> usingSocketMessaging(@RequestBody Notification notification) {
+            if (ObjectUtils.isEmpty(notification.getToRole()) && ObjectUtils.isEmpty(notification.getToId())) {
+                logger.error("Error saving message {}", notification);
                 return new RestResponseDto().failureModel("Error saving message");
             }
             String api = SocketController.API;
-            if(!ObjectUtils.isEmpty(message.getToId())){
-                api = api.concat("/"+message.getToId());
+            if(!ObjectUtils.isEmpty(notification.getToId())){
+                api = api.concat("/"+ notification.getToId());
             }
-           if(!ObjectUtils.isEmpty(message.getToRole())){
-           api = api.concat("/"+ message.getToRole());
+           if(!ObjectUtils.isEmpty(notification.getToRole())){
+           api = api.concat("/"+ notification.getToRole());
           }
-        message.setMessage(service.messageGenerator(message));
-        simpMessagingTemplate.convertAndSend(api, message);
-        return new RestResponseDto().successModel(service.save(message));
+        notification.setMessage(service.messageGenerator(notification));
+        simpMessagingTemplate.convertAndSend(api, notification);
+        return new RestResponseDto().successModel(service.save(notification));
     }
 }

@@ -1,8 +1,8 @@
-package com.invo.matchela.api.user.repository;
+package com.invo.matchela.authorization.user.repository;
 
 import java.util.Map;
 
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.User;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.invo.matchela.core.BaseSpecBuilder;

@@ -7,11 +7,11 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.invo.matchela.api.notification.Message;
+import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;
 
-public class NotificationSpec implements Specification<Message> {
+public class NotificationSpec implements Specification<Notification> {
 
     private static final String FILTER_BY_STATUS = "status";
     private static final String FILTER_BY_TO_ID = "toId";
@@ -26,8 +26,8 @@ public class NotificationSpec implements Specification<Message> {
     }
 
     @Override
-    public Predicate toPredicate(Root<Message> root, CriteriaQuery<?> criteriaQuery,
-        CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(Root<Notification> root, CriteriaQuery<?> criteriaQuery,
+                                 CriteriaBuilder criteriaBuilder) {
         switch (property) {
             case FILTER_BY_STATUS:
                 return criteriaBuilder.equal(root.get(property), Status.valueOf(value));

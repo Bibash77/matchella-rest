@@ -1,6 +1,6 @@
 package com.invo.matchela.api.entity;
 
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

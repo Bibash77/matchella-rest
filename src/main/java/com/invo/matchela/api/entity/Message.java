@@ -1,6 +1,6 @@
 package com.invo.matchela.api.entity;
 
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.User;
 import com.invo.matchela.core.component.TextEncryptorConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -12,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Table(name="tbl_message")
 public class Message {
 
 	@JsonIgnore

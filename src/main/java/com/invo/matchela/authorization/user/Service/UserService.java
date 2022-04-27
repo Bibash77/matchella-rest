@@ -1,14 +1,14 @@
-package com.invo.matchela.api.user.Service;
+package com.invo.matchela.authorization.user.Service;
 
 import java.util.Date;
 import java.util.Map;
 
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.User;
 import com.invo.matchela.core.BaseService;
 import com.invo.matchela.core.enums.Status;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService  extends BaseService<User>, UserDetailsService {
+public interface UserService  extends BaseService<User>,UserDetailsService {
 
     public String userCodeGenerateor();
 

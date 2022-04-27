@@ -1,6 +1,6 @@
 package com.invo.matchela.web.rest.controller.notification;
 
-import com.invo.matchela.api.notification.Message;
+import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.api.notification.service.MessageService;
 import com.invo.matchela.core.PaginationUtils;
 import com.invo.matchela.core.dto.RestResponseDto;
@@ -32,13 +32,13 @@ public class NotificationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveNotification(@RequestBody Message message) {
-        Message savedMessage = service.save(message);
-        if (savedMessage == null) {
+    public ResponseEntity<?> saveNotification(@RequestBody Notification notification) {
+        Notification savedNotification = service.save(notification);
+        if (savedNotification == null) {
             logger.error("Error saving notification.");
             return new RestResponseDto().failureModel("Error saving notification");
         } else {
-            return new RestResponseDto().successModel(savedMessage);
+            return new RestResponseDto().successModel(savedNotification);
         }
     }
 

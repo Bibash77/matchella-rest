@@ -1,4 +1,4 @@
-package com.invo.matchela.api.user;
+package com.invo.matchela.authorization.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

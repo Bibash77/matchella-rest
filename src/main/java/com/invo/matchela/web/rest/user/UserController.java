@@ -4,8 +4,8 @@ import java.util.Date;
 
 import com.invo.matchela.api.dto.LoginDto;
 import com.invo.matchela.api.dto.UserDto;
-import com.invo.matchela.api.user.Service.UserService;
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.Service.UserService;
+import com.invo.matchela.authorization.user.User;
 import com.invo.matchela.core.dto.RestResponseDto;
 import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;

@@ -8,10 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.bibash.invo")
-@EntityScan("com.bibash.matchella")
-@EnableCaching
-@EnableScheduling
 public class MatchellaRestApplication {
 
 	public static void main(String[] args) {

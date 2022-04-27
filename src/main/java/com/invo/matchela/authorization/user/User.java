@@ -1,41 +1,42 @@
-package com.invo.matchela.api.user;
+package com.invo.matchela.authorization.user;
 
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.Collection;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.invo.matchela.core.BaseEntity;
 import com.invo.matchela.core.component.TextEncryptorConverter;
 import com.invo.matchela.core.constants.Constants;
 import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="user")
-public class User extends BaseEntity<Long> implements UserDetails , Serializable {
+@Table(name = "user")
+public class User extends BaseEntity<Long> implements UserDetails, Serializable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "user_name", unique = true, nullable = false)
-    private String userName;
+    private String username;
 
     @Column(name = "Full_Name")
     private String fullName;
@@ -90,9 +91,17 @@ public class User extends BaseEntity<Long> implements UserDetails , Serializable
     private String login;
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+
+        authorities.addAll(AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+
+        return authorities;
     }
+
 
     @Override
     public String getPassword() {
@@ -101,7 +110,7 @@ public class User extends BaseEntity<Long> implements UserDetails , Serializable
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.invo.matchela.api.user.repository;
+package com.invo.matchela.authorization.user.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.invo.matchela.api.user.User;
+import com.invo.matchela.authorization.user.User;
 
 public class UserSpec implements Specification<User> {
 
