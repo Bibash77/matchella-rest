@@ -3,6 +3,7 @@ package com.invo.matchela.web.rest.controller.notification;
 import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.api.notification.service.MessageService;
 import com.invo.matchela.authorization.user.Service.UserService;
+import com.invo.matchela.core.dto.MatchResponse;
 import com.invo.matchela.core.dto.RestResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public class SocketController {
     public ResponseEntity<?> usingSocketMessaging(@RequestBody Notification notification) {
             if (ObjectUtils.isEmpty(notification.getToRole()) && ObjectUtils.isEmpty(notification.getToId())) {
                 logger.error("Error saving message {}", notification);
-                return new RestResponseDto().failureModel("Error saving message");
+                return MatchResponse.failResponseBadRequest("Error saving message");
             }
             String api = SocketController.API;
             if(!ObjectUtils.isEmpty(notification.getToId())){
@@ -45,6 +46,6 @@ public class SocketController {
           }
         notification.setMessage(service.messageGenerator(notification));
         simpMessagingTemplate.convertAndSend(api, notification);
-        return new RestResponseDto().successModel(service.save(notification));
+        return MatchResponse.successResponse(service.save(notification));
     }
 }
