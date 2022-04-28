@@ -3,6 +3,7 @@ package com.invo.matchela.web.rest.controller.notification;
 import com.invo.matchela.api.notification.Notification;
 import com.invo.matchela.api.notification.service.MessageService;
 import com.invo.matchela.core.PaginationUtils;
+import com.invo.matchela.core.dto.MatchResponse;
 import com.invo.matchela.core.dto.RestResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,30 +33,30 @@ public class NotificationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveNotification(@RequestBody Notification notification) {
+    public ResponseEntity<RestResponseDto> saveNotification(@RequestBody Notification notification) {
         Notification savedNotification = service.save(notification);
         if (savedNotification == null) {
             logger.error("Error saving notification.");
-            return new RestResponseDto().failureModel("Error saving notification");
+            return MatchResponse.failResponseBadRequest("Error saving notification");
         } else {
-            return new RestResponseDto().successModel(savedNotification);
+            return MatchResponse.successResponse(savedNotification);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable long id) {
-        return new RestResponseDto().successModel(service.findOne(id));
+    public ResponseEntity<RestResponseDto> getById(@PathVariable long id) {
+        return MatchResponse.successResponse(service.findOne(id));
     }
 
     @PostMapping(path = "/list")
-    public ResponseEntity<?> getPageable(@RequestBody Object searchDto,
+    public ResponseEntity<RestResponseDto> getPageable(@RequestBody Object searchDto,
         @RequestParam("page") int page, @RequestParam("size") int size) {
-        return new RestResponseDto().successModel(
+        return MatchResponse.successResponse(
             service.findAllPageable(searchDto, PaginationUtils.pageable(page, size)));
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<?> getAll() {
-        return new RestResponseDto().successModel(service.findAll());
+    public ResponseEntity<RestResponseDto> getAll() {
+        return MatchResponse.successResponse(service.findAll());
     }
 }
