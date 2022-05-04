@@ -1,6 +1,6 @@
 package com.invo.matchela.core.dto;
 
-import com.invo.matchela.authorization.user.User;
+import com.invo.matchela.core.authorization.user.User;
 import com.invo.matchela.core.constants.Constants;
 
 import javax.validation.constraints.Email;

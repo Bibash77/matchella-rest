@@ -1,7 +1,7 @@
 package com.invo.matchela.core.config;
 
-import com.invo.matchela.authorization.user.User;
-import com.invo.matchela.authorization.user.repository.UserRepository;
+import com.invo.matchela.core.authorization.user.User;
+import com.invo.matchela.core.authorization.user.repository.UserRepository;
 import com.invo.matchela.core.enums.AppConstant;
 import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;

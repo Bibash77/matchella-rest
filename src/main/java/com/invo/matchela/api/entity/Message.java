@@ -1,6 +1,6 @@
 package com.invo.matchela.api.entity;
 
-import com.invo.matchela.authorization.user.User;
+import com.invo.matchela.core.authorization.user.User;
 import com.invo.matchela.core.component.TextEncryptorConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

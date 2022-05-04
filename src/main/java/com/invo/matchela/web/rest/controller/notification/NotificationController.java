@@ -1,7 +1,7 @@
 package com.invo.matchela.web.rest.controller.notification;
 
-import com.invo.matchela.api.notification.Notification;
-import com.invo.matchela.api.notification.service.MessageService;
+import com.invo.matchela.api.entity.Notification;
+import com.invo.matchela.api.service.MessageService;
 import com.invo.matchela.core.PaginationUtils;
 import com.invo.matchela.core.dto.MatchResponse;
 import com.invo.matchela.core.dto.RestResponseDto;
