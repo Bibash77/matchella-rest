@@ -1,14 +1,12 @@
 package com.invo.matchela.api.entity.cards;
 
+import com.invo.matchela.core.AuditActiveAbstract;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,9 +14,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "card")
-public class Card {
+public class Card extends AuditActiveAbstract {
     @Id
-    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "card_seq", sequenceName = "card_seq", allocationSize = 1)
+    @GeneratedValue(generator = "card_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public Long getId() {

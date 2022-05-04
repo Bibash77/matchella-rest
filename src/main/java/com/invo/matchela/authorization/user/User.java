@@ -1,6 +1,7 @@
 package com.invo.matchela.authorization.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.invo.matchela.core.AuditActiveAbstract;
 import com.invo.matchela.core.BaseEntity;
 import com.invo.matchela.core.component.TextEncryptorConverter;
 import com.invo.matchela.core.constants.Constants;
@@ -29,7 +30,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-public class User extends BaseEntity<Long> implements UserDetails, Serializable {
+public class User extends AuditActiveAbstract implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
