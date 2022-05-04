@@ -1,10 +1,9 @@
 package com.invo.matchela.web.rest.controller.notification;
 
-import com.invo.matchela.api.notification.Notification;
-import com.invo.matchela.api.notification.service.MessageService;
-import com.invo.matchela.authorization.user.Service.UserService;
+import com.invo.matchela.api.entity.Notification;
+import com.invo.matchela.api.service.MessageService;
+import com.invo.matchela.core.authorization.user.Service.UserService;
 import com.invo.matchela.core.dto.MatchResponse;
-import com.invo.matchela.core.dto.RestResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,8 @@
 package com.invo.matchela.core.config;
 
-import com.invo.matchela.authorization.jwt.CustomJwtAuthenticationFilter;
-import com.invo.matchela.authorization.jwt.JwtAuthenticationEntryPoint;
+import com.invo.matchela.core.authorization.jwt.CustomJwtAuthenticationFilter;
+import com.invo.matchela.core.authorization.jwt.JwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
