@@ -55,9 +55,9 @@ public class UserControllerImpl {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        user.setStatus(Status.INACTIVE);
-        user.setRoleType(RoleType.STUDENT);
+    public ResponseEntity<?> registerUser(@RequestBody UserDto user) {
+        userService.registerUser(user);
+
         return MatchResponse.successResponse(new User());
     }
 

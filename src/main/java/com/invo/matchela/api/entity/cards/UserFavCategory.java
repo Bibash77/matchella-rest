@@ -1,6 +1,7 @@
 package com.invo.matchela.api.entity.cards;
 
 import com.invo.matchela.core.AuditActiveAbstract;
+import com.invo.matchela.core.authorization.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,14 @@ public class UserFavCategory extends AuditActiveAbstract {
     @Column(name = "card_category_id", columnDefinition = "bigint references card_category(id)")
     private Long cardCategoryId;
 
-    @Column(name = "user_id", columnDefinition = "bigint references user(id)")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id" , referencedColumnName = "id")
+    private User user;
+
+    @Column(name = "on_fav_count")
+    private Long onFavCount;
+
+    @Column(name = "current_fav")
+    private Boolean currentFav;
 
 }

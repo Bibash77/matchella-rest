@@ -1,6 +1,11 @@
 package com.invo.matchela.core.authorization.user.Service;
 
+import com.invo.matchela.api.dto.UserDto;
+import com.invo.matchela.api.entity.cards.UserFavCategory;
+import com.invo.matchela.api.mapper.UserMapper;
+import com.invo.matchela.api.service.UserFavCategoryService;
 import com.invo.matchela.core.authorization.user.User;
+import com.invo.matchela.core.authorization.user.UserRegisterProcessor;
 import com.invo.matchela.core.authorization.user.repository.UserRepository;
 import com.invo.matchela.core.config.exception.CustomException;
 import com.invo.matchela.core.enums.Status;
@@ -23,6 +28,18 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private  UserRegisterProcessor userRegisterProcessor;
+
+
+    private final UserMapper userMapper;
+    private final UserFavCategoryService userFavCategoryService;
+
+    public UserServiceImpl(UserMapper userMapper, UserFavCategoryService userFavCategoryService) {
+        this.userMapper = userMapper;
+        this.userFavCategoryService = userFavCategoryService;
+    }
 
 
     @Override
@@ -101,6 +118,13 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new UsernameNotFoundException("User is not Authenticated; Found type: " + authentication.getPrincipal().getClass());
         }
+    }
+
+    @Override
+    public void registerUser(UserDto userDto) {
+        User user = userMapper.asEntity(userDto);
+        userFavCategoryService.save(userRegisterProcessor.processRegisterFav(user.getUserFavCategories()));
+        save(user);
     }
 
     @Override
