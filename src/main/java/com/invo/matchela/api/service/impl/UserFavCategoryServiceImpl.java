@@ -3,12 +3,17 @@ package com.invo.matchela.api.service.impl;
 import com.invo.matchela.api.entity.cards.UserFavCategory;
 import com.invo.matchela.api.dao.UserFavCategoryRepository;
 import com.invo.matchela.api.service.UserFavCategoryService;
+import com.invo.matchela.core.authorization.user.AuthenticationUtils;
+import com.invo.matchela.core.authorization.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +21,11 @@ import java.util.Optional;
 @Transactional
 public class UserFavCategoryServiceImpl implements UserFavCategoryService {
     private final UserFavCategoryRepository repository;
+    private final AuthenticationUtils authenticationUtils;
 
-    public UserFavCategoryServiceImpl(UserFavCategoryRepository repository) {
+    public UserFavCategoryServiceImpl(UserFavCategoryRepository repository, AuthenticationUtils authenticationUtils) {
         this.repository = repository;
+        this.authenticationUtils = authenticationUtils;
     }
 
     @Override
@@ -27,7 +34,7 @@ public class UserFavCategoryServiceImpl implements UserFavCategoryService {
     }
 
     @Override
-    public List<UserFavCategory> save(List<UserFavCategory> entities) {
+    public List<UserFavCategory> saveAll(List<UserFavCategory> entities) {
         return (List<UserFavCategory>) repository.saveAll(entities);
     }
 
@@ -60,5 +67,19 @@ public class UserFavCategoryServiceImpl implements UserFavCategoryService {
             return save(entity);
         }
         return null;
+    }
+
+    @Override
+    public void addMultipleCategory(List<Long> ids) {
+        List<UserFavCategory> userFavCategories = new ArrayList<>();
+
+        User user = authenticationUtils.getUser();
+        ids.forEach(id -> {
+            UserFavCategory uf = new UserFavCategory();
+            uf.setCardCategoryId(id);
+            uf.setUser(user);
+            userFavCategories.add(uf);
+        });
+        this.saveAll(userFavCategories);
     }
 }

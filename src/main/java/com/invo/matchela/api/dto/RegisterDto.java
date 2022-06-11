@@ -1,20 +1,38 @@
 package com.invo.matchela.api.dto;
 
+import com.invo.matchela.core.enums.Gender;
+import com.invo.matchela.core.enums.Status;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class RegisterDto {
-	
-	private String email;
+public class RegisterDto extends AbstractDTO<Long>{
+
 	private String password;
-	private String firstName;
-	private Date dateOfBirth;
 	private String referrerCode;
-	
-	private long gender;
-	
 	private boolean termsConditions;
 	private boolean privacy;
+
+	private String userName;
+	private String firstName;
+	private String lastName;
+
+	private Gender gender;
+
+	private Status status;
+
+	private String fullName;
+
+	@NotNull
+	@Email
+	private String email;
+
+	private LocalDate dateOfBirth;
+	private Double confirmationCode;
+	List<UserFavCategoryDTO> userFavCategory;
 }

@@ -27,7 +27,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> save(List<Card> entities) {
+    public List<Card> saveAll(List<Card> entities) {
         return (List<Card>) repository.saveAll(entities);
     }
 

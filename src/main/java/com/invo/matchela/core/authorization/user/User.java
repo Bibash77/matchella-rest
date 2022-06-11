@@ -1,10 +1,12 @@
 package com.invo.matchela.core.authorization.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.invo.matchela.api.entity.cards.UserFavCategory;
 import com.invo.matchela.core.AuditActiveAbstract;
 import com.invo.matchela.core.BaseEntity;
 import com.invo.matchela.core.component.TextEncryptorConverter;
 import com.invo.matchela.core.constants.Constants;
+import com.invo.matchela.core.enums.Gender;
 import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;
 import lombok.AllArgsConstructor;
@@ -21,9 +23,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -35,6 +39,11 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "gender")
+    private Gender gender;
+
+    private LocalDate dateOfBirth;
 
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
@@ -85,8 +94,11 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
+    @Transient
+    @OneToMany(mappedBy = "user")
+    private Set<UserFavCategory> userFavCategories;
 
-    @NotBlank
+
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
@@ -98,7 +110,7 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 
-        authorities.addAll(AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+        authorities.addAll(AuthorityUtils.createAuthorityList("ADMIN","USER"));
 
         return authorities;
     }

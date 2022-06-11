@@ -1,8 +1,10 @@
 package com.invo.matchela.web.rest.controller.user.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import com.invo.matchela.api.dto.LoginDto;
+import com.invo.matchela.api.dto.RegisterDto;
 import com.invo.matchela.api.dto.UserDto;
 import com.invo.matchela.core.authorization.user.Service.UserService;
 import com.invo.matchela.core.authorization.user.User;
@@ -55,9 +57,14 @@ public class UserControllerImpl {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        user.setStatus(Status.INACTIVE);
-        user.setRoleType(RoleType.STUDENT);
+    public ResponseEntity<?> registerUser(@RequestBody UserDto user) {
+        userService.registerUser(user);
+        return MatchResponse.successResponse(new User());
+    }
+
+    @PostMapping(value = "/assign-fav-category")
+    public ResponseEntity<?> registerUser(@RequestBody List<Long> ids) {
+        userService.assignFavCategory(ids);
         return MatchResponse.successResponse(new User());
     }
 

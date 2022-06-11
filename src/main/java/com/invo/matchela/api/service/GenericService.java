@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface GenericService<E, M> {
     E save(E entity);
 
-    List<E> save(List<E> entities);
+    List<E> saveAll(List<E> entities);
 
     void deleteById(M id);
 

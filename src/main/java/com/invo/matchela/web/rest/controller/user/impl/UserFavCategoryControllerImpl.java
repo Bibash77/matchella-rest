@@ -1,6 +1,8 @@
 package com.invo.matchela.web.rest.controller.user.impl;
 
 import com.invo.matchela.api.entity.cards.UserFavCategory;
+import com.invo.matchela.core.dto.MatchResponse;
+import com.invo.matchela.core.dto.RestResponseDto;
 import com.invo.matchela.web.rest.controller.user.UserFavCategoryController;
 import com.invo.matchela.api.dto.UserFavCategoryDTO;
 import com.invo.matchela.api.mapper.UserFavCategoryMapper;
@@ -9,12 +11,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequestMapping("/user-fav-category")
+@RequestMapping("/v1/user-fav-category")
 @RestController
 public class UserFavCategoryControllerImpl implements UserFavCategoryController {
     private final UserFavCategoryService userFavCategoryService;
@@ -31,6 +36,24 @@ public class UserFavCategoryControllerImpl implements UserFavCategoryController 
     public UserFavCategoryDTO save(@RequestBody UserFavCategoryDTO userFavCategoryDTO) {
         UserFavCategory userFavCategory = userFavCategoryMapper.asEntity(userFavCategoryDTO);
         return userFavCategoryMapper.asDTO(userFavCategoryService.save(userFavCategory));
+    }
+
+    @Override
+    @PutMapping(value = "save-all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<UserFavCategoryDTO> saveAll(@RequestBody List<UserFavCategoryDTO> userFavCategoryDTO) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        List<UserFavCategory> userFavCategory = userFavCategoryMapper.asEntityList(userFavCategoryDTO);
+        return userFavCategoryMapper.asDTOList(userFavCategoryService.saveAll(userFavCategory));
+    }
+
+    @Override
+    @PostMapping(value = "save-all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> saveAllByIds(@RequestBody List<Long> userFavCategoryDTO) {
+        userFavCategoryService.addMultipleCategory(userFavCategoryDTO);
+        return MatchResponse.successResponse(new UserFavCategoryDTO());
     }
 
     @Override

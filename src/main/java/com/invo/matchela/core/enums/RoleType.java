@@ -1,7 +1,7 @@
 package com.invo.matchela.core.enums;
 
 public enum RoleType {
-    ADMIN("ADMIN"), STUDENT("STUDENT"),KITCHENER("KITCHENER");
+    ADMIN("ADMIN"), USER("USER");
 
     private final String value;
 

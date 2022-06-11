@@ -1,8 +1,10 @@
 package com.invo.matchela.core.authorization.user.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import com.invo.matchela.api.dto.UserDto;
 import com.invo.matchela.core.authorization.user.User;
 import com.invo.matchela.core.BaseService;
 import com.invo.matchela.core.enums.Status;
@@ -21,4 +23,8 @@ public interface UserService  extends BaseService<User>,UserDetailsService {
     public User findById(Long userId);
 
     User getAuthenticated();
+
+    void registerUser(UserDto user);
+
+    void assignFavCategory(List<Long> ids);
 }

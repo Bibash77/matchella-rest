@@ -1,8 +1,12 @@
 package com.invo.matchela.core.authorization.user.Service;
 
+import com.invo.matchela.api.dto.UserDto;
+import com.invo.matchela.api.mapper.UserMapper;
+import com.invo.matchela.api.service.UserFavCategoryService;
 import com.invo.matchela.core.authorization.user.User;
+import com.invo.matchela.core.authorization.user.UserRegisterProcessor;
 import com.invo.matchela.core.authorization.user.repository.UserRepository;
-import com.invo.matchela.core.config.exception.CustomException;
+import com.invo.matchela.core.enums.RoleType;
 import com.invo.matchela.core.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +28,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private  UserRegisterProcessor userRegisterProcessor;
+
+
+    private final UserMapper userMapper;
+    private final UserFavCategoryService userFavCategoryService;
+
+    public UserServiceImpl(UserMapper userMapper, UserFavCategoryService userFavCategoryService) {
+        this.userMapper = userMapper;
+        this.userFavCategoryService = userFavCategoryService;
+    }
+
 
     @Override
     public List findAll() {
@@ -37,17 +53,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        try {
             if (user.getId() == null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setUserCode(userCodeGenerateor());
-                user.setStatus(Status.INACTIVE);
+                user.setRoleType(RoleType.USER);
+                user.setActivated(false);
             }
             return userRepository.save(user);
-        } catch (Exception e) {
-            throw new CustomException(
-                    "User with username: " + user.getUsername() + " already exist!!!");
-        }
+
     }
 
     @Override
@@ -101,6 +114,17 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new UsernameNotFoundException("User is not Authenticated; Found type: " + authentication.getPrincipal().getClass());
         }
+    }
+
+    @Override
+    public void registerUser(UserDto userDto) {
+        User user = userMapper.asEntity(userDto);
+        save(user);
+    }
+
+    @Override
+    public void assignFavCategory(List<Long> ids) {
+
     }
 
     @Override
