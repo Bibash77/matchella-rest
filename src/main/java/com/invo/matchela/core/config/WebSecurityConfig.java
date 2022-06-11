@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         expressionInterceptUrlRegistry.antMatchers("/oauth/token")
                 .permitAll()
                 .antMatchers("/v1/user/resetPassword")
+                .permitAll().antMatchers("/v1/user/register")
                 .permitAll()
                 .antMatchers("/v1/user/forgotPassword").permitAll()
 

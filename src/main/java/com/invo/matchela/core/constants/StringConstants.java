@@ -19,6 +19,7 @@ public class StringConstants {
     public static final int DEFAULT_CODE_SIZE = 15;
     public static final int MINISTRY_CODE_SIZE = 3;
     public static final int DEFAULT_MIN_SIZE = 6;
+    public static final int DEFAULT_MIN_PASSWORD_SIZE = 6;
     public static final int DEFAULT_NAME_SIZE = 20;
     public static final int DEFAULT_MIN_SIZE_USER = 5;
     public static final int DEFAULT_MIN_SIZE_4 = 4;

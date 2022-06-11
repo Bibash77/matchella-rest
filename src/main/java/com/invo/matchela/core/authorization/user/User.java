@@ -99,7 +99,6 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
     private Set<UserFavCategory> userFavCategories;
 
 
-    @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
@@ -111,7 +110,7 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 
-        authorities.addAll(AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+        authorities.addAll(AuthorityUtils.createAuthorityList("ADMIN","USER"));
 
         return authorities;
     }

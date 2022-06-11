@@ -21,11 +21,11 @@ public class UserFavCategory extends AuditActiveAbstract {
     @GeneratedValue(generator = "user_fav_category_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "card_category_id", columnDefinition = "bigint references card_category(id)")
+    @Column(name = "card_category_id", columnDefinition = "bigint references card_category(id)", nullable = false)
     private Long cardCategoryId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id" , referencedColumnName = "id")
+    @JoinColumn(name = "user_id" , referencedColumnName = "id" , foreignKey = @ForeignKey(name = "fk_user_fav_category_user_id"))
     private User user;
 
     @Column(name = "on_fav_count")

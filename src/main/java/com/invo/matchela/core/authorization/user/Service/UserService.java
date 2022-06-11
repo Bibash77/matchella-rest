@@ -1,6 +1,7 @@
 package com.invo.matchela.core.authorization.user.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.invo.matchela.api.dto.UserDto;
@@ -24,4 +25,6 @@ public interface UserService  extends BaseService<User>,UserDetailsService {
     User getAuthenticated();
 
     void registerUser(UserDto user);
+
+    void assignFavCategory(List<Long> ids);
 }
