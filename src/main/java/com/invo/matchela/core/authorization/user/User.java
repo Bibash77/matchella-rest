@@ -1,5 +1,6 @@
 package com.invo.matchela.core.authorization.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.invo.matchela.api.entity.cards.UserFavCategory;
 import com.invo.matchela.core.AuditActiveAbstract;
@@ -95,6 +96,7 @@ public class User extends AuditActiveAbstract implements UserDetails, Serializab
     private Status status;
 
     @Transient
+    @JsonBackReference
     @OneToMany(mappedBy = "user")
     private Set<UserFavCategory> userFavCategories;
 

@@ -1,5 +1,6 @@
 package com.invo.matchela.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.invo.matchela.core.constants.StringConstants;
 import com.invo.matchela.core.enums.Gender;
 import com.invo.matchela.core.enums.RoleType;
@@ -21,6 +22,7 @@ public class UserDto {
 
     private String firstName;
 
+    @JsonIgnore
     @Size(min = StringConstants.DEFAULT_MIN_PASSWORD_SIZE)
     private String password;
 
