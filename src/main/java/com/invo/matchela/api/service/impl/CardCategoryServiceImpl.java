@@ -57,6 +57,7 @@ public class CardCategoryServiceImpl implements CardCategoryService {
     public CardCategory update(CardCategory entity, Long id) {
         Optional<CardCategory> optional = findById(id);
         if (optional.isPresent()) {
+            entity.setId(id);
             return save(entity);
         }
         return null;
