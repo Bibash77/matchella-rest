@@ -24,6 +24,8 @@ public class RefreshToken {
     @Column(nullable = false, unique = true)
     @Lob
     private String token;
+    private String roleType;
+    private String fullName;
 
     @Column(nullable = false)
     private Instant expiryDate;

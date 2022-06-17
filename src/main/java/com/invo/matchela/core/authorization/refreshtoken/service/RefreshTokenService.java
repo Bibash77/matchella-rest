@@ -58,6 +58,9 @@ public class RefreshTokenService {
         refreshToken.setUserId(userId);
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
         refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setUserId(userId);
+        refreshToken.setRoleType(userById.getRoleType().getValue());
+        refreshToken.setFullName(userById.getFullName());
         refreshToken = refreshTokenRepository.save(refreshToken);
         return refreshToken;
     }

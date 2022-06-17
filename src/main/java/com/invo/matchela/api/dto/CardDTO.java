@@ -16,17 +16,4 @@ public class CardDTO extends AbstractDTO<Long> {
     private Integer maxAllowedMatch;
     private CardCategoryDTO cardCategoryDTO;
 
-
-
-    public CardDTO() {
-        // TODO document why this constructor is empty
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
 }
