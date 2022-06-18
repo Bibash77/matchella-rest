@@ -79,7 +79,7 @@ public class AccessController {
 
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getId(), deviceId);
         String token = accessTokenService.createToken(user, deviceId);
-        JwtResponse response = new JwtResponse(token, refreshToken.getToken(), user.getUsername(), user.getEmail(), roles);
+        JwtResponse response = new JwtResponse(token, refreshToken.getToken(), user.getUsername(), user.getEmail(), roles, user.getId(), user.getFullName());
         return ResponseEntity.ok(response);
     }
 }

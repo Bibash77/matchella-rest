@@ -28,12 +28,15 @@ public class Card extends CardDetail {
 
 
     @NotNull
-    @NotBlank
-    @Size(min = StringConstants.DEFAULT_NAME_SIZE)
+//    @Size(min = StringConstants.DEFAULT_MAX_LIMIT)
     private String title;
 
+    @Lob
+    @Column(name = "card_image")
+    private String cardImage;
 
-    @Size(min = StringConstants.DEFAULT_NAME_SIZE)
+
+//    @Size(min = StringConstants.DEFAULT_NAME_SIZE)
     private String cardType;
 
     // todo add destination in different way
@@ -49,13 +52,11 @@ public class Card extends CardDetail {
     private CardCategory cardCategory;
 
     @NotNull
-    @NotBlank
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "card_expiry_date")
     private LocalDate cardExpiryDate;
 
     @NotNull
-    @NotBlank
     @Column(name = "maxAllowedMatch")
     private Integer maxAllowedMatch;
 }

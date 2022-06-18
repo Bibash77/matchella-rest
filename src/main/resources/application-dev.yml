@@ -4,5 +4,5 @@ spring:
     username: root
     password:
     driverClassName: com.mysql.jdbc.Driver
-  jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect

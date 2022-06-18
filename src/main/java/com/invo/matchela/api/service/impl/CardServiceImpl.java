@@ -57,6 +57,7 @@ public class CardServiceImpl implements CardService {
     public Card update(Card entity, Long id) {
         Optional<Card> optional = findById(id);
         if (optional.isPresent()) {
+            entity.setId(id);
             return save(entity);
         }
         return null;

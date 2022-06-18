@@ -1,17 +1,20 @@
 package com.invo.matchela.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.time.LocalDate;
+
+@Data
 public class CardDTO extends AbstractDTO<Long> {
     private Long id;
+    private String title;
+    private String cardType;
+    private String detailBody;
+//    @JsonFormat(pattern = "YYYY-MM-DD")
+    private LocalDate cardExpiryDate;
+    private Integer maxAllowedMatch;
+    private CardCategoryDTO cardCategoryDTO;
+    private String cardImage;
 
-    public CardDTO() {
-        // TODO document why this constructor is empty
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
 }
