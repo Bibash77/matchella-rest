@@ -31,6 +31,10 @@ public class Card extends CardDetail {
 //    @Size(min = StringConstants.DEFAULT_MAX_LIMIT)
     private String title;
 
+    @Lob
+    @Column(name = "card_image")
+    private String cardImage;
+
 
 //    @Size(min = StringConstants.DEFAULT_NAME_SIZE)
     private String cardType;

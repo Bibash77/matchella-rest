@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
                 user.setUserCode(userCodeGenerateor());
                 user.setRoleType(RoleType.USER);
                 user.setActivated(false);
+                user.setActive(Boolean.TRUE);
             }
             return userRepository.save(user);
 

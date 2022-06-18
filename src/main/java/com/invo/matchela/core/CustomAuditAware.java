@@ -13,6 +13,9 @@ public class CustomAuditAware implements AuditorAware<Long> {
     @Bean
     public Optional<Long> getCurrentAuditor() {
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            if(!(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User)){
+                return Optional.of(0L);
+            }
             User auth = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if(auth != null) {
                 return Optional.of(auth.getId());

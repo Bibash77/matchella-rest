@@ -15,5 +15,6 @@ public class CardDTO extends AbstractDTO<Long> {
     private LocalDate cardExpiryDate;
     private Integer maxAllowedMatch;
     private CardCategoryDTO cardCategoryDTO;
+    private String cardImage;
 
 }

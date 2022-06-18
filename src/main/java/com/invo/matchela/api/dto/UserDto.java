@@ -22,7 +22,6 @@ public class UserDto {
 
     private String firstName;
 
-    @JsonIgnore
     @Size(min = StringConstants.DEFAULT_MIN_PASSWORD_SIZE)
     private String password;
 
